@@ -1,10 +1,10 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Apartments;
+import com.example.demo.model.Apartment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ApartmentsRepository extends JpaRepository<Apartments, Integer> {
+public interface ApartmentsRepository extends JpaRepository<Apartment, Integer> {
 
 }

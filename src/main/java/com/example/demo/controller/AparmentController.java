@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Apartments;
+import com.example.demo.model.Apartment;
 import com.example.demo.service.ApartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,27 +16,27 @@ public class AparmentController {
     private ApartmentService apartmentService;
 
     @PostMapping
-    public ResponseEntity<Apartments> createApartment(@RequestBody Apartments apartments){
-        Apartments apartments1 = apartmentService.createApartment(apartments);
-        return ResponseEntity.ok(apartments1);
+    public ResponseEntity<Apartment> createApartment(@RequestBody Apartment apartment){
+        Apartment apartment1 = apartmentService.createApartment(apartment);
+        return ResponseEntity.ok(apartment1);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Apartments> updateApartment(@RequestBody Apartments apartments, @PathVariable int id){
-        Apartments apartments1 = apartmentService.update(apartments, id);
-        return ResponseEntity.ok(apartments1);
+    public ResponseEntity<Apartment> updateApartment(@RequestBody Apartment apartment, @PathVariable int id){
+        Apartment apartment1 = apartmentService.update(apartment, id);
+        return ResponseEntity.ok(apartment1);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Apartments> getApartments(@PathVariable int id){
-        Apartments apartments = apartmentService.getApartmentById(id);
-        return ResponseEntity.ok(apartments);
+    public ResponseEntity<Apartment> getApartments(@PathVariable int id){
+        Apartment apartment = apartmentService.getApartmentById(id);
+        return ResponseEntity.ok(apartment);
     }
     @GetMapping
-    public ResponseEntity<List<Apartments>> getAllApartments(){
-        List<Apartments> apartments = apartmentService.getAllAparment();
+    public ResponseEntity<List<Apartment>> getAllApartments(){
+        List<Apartment> apartments = apartmentService.getAllAparment();
         return ResponseEntity.ok(apartments);
     }
     @PostMapping("/{id}")
-    public ResponseEntity<Apartments> deleteApartment(@PathVariable int id){
+    public ResponseEntity<Apartment> deleteApartment(@PathVariable int id){
         apartmentService.deleteApartment(id);
         return ResponseEntity.noContent().build();
     }
