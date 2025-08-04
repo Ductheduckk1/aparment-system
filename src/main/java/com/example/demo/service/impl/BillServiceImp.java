@@ -36,9 +36,8 @@ public class BillServiceImp implements BillService {
         if (existing.isPresent()) {
             Bill updated = existing.get();
             updated.setApartment(bill.getApartment());
-            updated.setBillType(bill.getBillType());
-            updated.setAmount(bill.getAmount());
-            updated.setUsages(bill.getUsages());
+            updated.setElectricUsages(bill.getElectricUsages());
+            updated.setWaterUsages(bill.getWaterUsages());
             updated.setDueDate(bill.getDueDate());
             updated.setPaid(bill.getPaid());
             return billRepository.save(updated);

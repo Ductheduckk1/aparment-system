@@ -22,13 +22,9 @@ public class Bill {
     @JoinColumn(name = "apartment_id")
     private Apartment apartment;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "bill_type", nullable = false)
-    private BillType billType;
+    private int electricUsages;
 
-    private Float amount;
-
-    private Float usages;
+    private int waterUsages;
 
     @Column(name = "due_date")
     private LocalDate dueDate;
@@ -37,9 +33,4 @@ public class Bill {
 
     @Column(name = "created_at")
     private LocalDate createdAt = LocalDate.now();
-
-}
-enum BillType {
-    ELECTRIC,
-    WATER
 }
