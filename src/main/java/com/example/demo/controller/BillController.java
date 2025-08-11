@@ -9,6 +9,7 @@ import com.example.demo.service.BillService;
 import com.example.demo.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +29,7 @@ public class BillController {
     private EmailService emailService;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public List<BillResponse> getAllBills() {
         return billService.getAllBills()
                 .stream()
@@ -36,6 +38,7 @@ public class BillController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<BillResponse> getBillById(@PathVariable Integer id) {
         return ResponseEntity.of(
                 billService.getBillById(id)
@@ -44,6 +47,7 @@ public class BillController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<BillResponse> createBill(@RequestBody BillRequest request) {
         Apartment apartment = apartmentService.findById(request.getApartmentId())
                 .orElseThrow(() -> new RuntimeException("Apartment not found with id: " + request.getApartmentId()));
@@ -73,6 +77,7 @@ public class BillController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<BillResponse> updateBill(@PathVariable Integer id, @RequestBody BillRequest request) {
         Apartment apartment = apartmentService.findById(request.getApartmentId())
                 .orElseThrow(() -> new RuntimeException("Apartment not found with id: " + request.getApartmentId()));
@@ -91,6 +96,7 @@ public class BillController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteBill(@PathVariable Integer id) {
         billService.deleteBill(id);
         return ResponseEntity.noContent().build();
