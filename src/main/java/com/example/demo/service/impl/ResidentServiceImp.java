@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Resident;
 import com.example.demo.repository.ResidentRepository;
 import com.example.demo.service.ResidentService;
@@ -21,7 +22,7 @@ public class ResidentServiceImp implements ResidentService {
 
     @Override
     public Resident getResidentById(int id){
-        return residentRepository.findById(id).orElse(null);
+        return residentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resident not found with id " + id));
     }
 
     @Override

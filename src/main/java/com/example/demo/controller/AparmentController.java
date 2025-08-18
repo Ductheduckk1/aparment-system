@@ -13,8 +13,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/apartments")
 public class AparmentController {
+
+    private final ApartmentService apartmentService;
+
     @Autowired
-    private ApartmentService apartmentService;
+    public AparmentController(ApartmentService apartmentService) {
+        this.apartmentService = apartmentService;
+    }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -40,7 +45,7 @@ public class AparmentController {
         List<Apartment> apartments = apartmentService.getAllAparment();
         return ResponseEntity.ok(apartments);
     }
-    @PostMapping("/{id}")
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Apartment> deleteApartment(@PathVariable int id){
         apartmentService.deleteApartment(id);

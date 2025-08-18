@@ -13,8 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/residents")
 public class ResidentController {
+    private final ResidentService residentService;
     @Autowired
-    private ResidentService residentService;
+    public ResidentController(ResidentService residentService) {
+        this.residentService = residentService;
+    }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -32,7 +35,7 @@ public class ResidentController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    public ResponseEntity<Resident> getResident(@PathVariable int id){
+    public ResponseEntity<Resident> getResidentById(@PathVariable int id){
         Resident resident = residentService.getResidentById(id);
         return ResponseEntity.ok(resident);
     }

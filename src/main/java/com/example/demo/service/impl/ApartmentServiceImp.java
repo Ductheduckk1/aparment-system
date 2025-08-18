@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Apartment;
 import com.example.demo.repository.ApartmentsRepository;
 import com.example.demo.service.ApartmentService;
@@ -22,7 +23,7 @@ public class ApartmentServiceImp implements ApartmentService {
 
     @Override
     public Apartment getApartmentById(int id) {
-        return apartmentsRepository.findById(id).orElse(null);
+        return apartmentsRepository.findById(id).orElseThrow(() -> new  ResourceNotFoundException("apartment not found with id: " + id));
     }
 
     @Override
